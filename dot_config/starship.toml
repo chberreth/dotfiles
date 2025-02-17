@@ -1,0 +1,12 @@
+# ~/.config/starship.toml
+
+command_timeout = 10000
+
+[status]
+disabled = false
+
+[character]
+format = "🍕 $symbol "
+
+[container]
+disabled = true
