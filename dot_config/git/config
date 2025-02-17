@@ -1,6 +1,6 @@
 [user]
 	name = chberreth
-	email = christoph.berreth@alexanderthamm.com #c.berreth@gmx.de
+	email = christoph.berreth.ext@bayer.com
 [pull]
 	rebase = true
 	ff = only
@@ -37,8 +37,3 @@
 	insteadOf = "https://github.com/"
 [push]
 	autoSetupRemote = true
-
-
-
-
-
