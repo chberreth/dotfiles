@@ -78,12 +78,9 @@ plugins=(
     python
     git-flow
     you-should-use
-    dotenv
 )
 
 source $ZSH/oh-my-zsh.sh
-
-eval "$(direnv hook zsh)"
 
 # User configuration
 
