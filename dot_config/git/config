@@ -1,6 +1,6 @@
 [user]
 	name = chberreth
-	email = christoph.berreth.ext@bayer.com
+	email = c.berreth@gmx.de
 [pull]
 	rebase = true
 	ff = only
