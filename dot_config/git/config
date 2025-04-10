@@ -31,8 +31,8 @@
 [core]
 	autocrlf = input
 	editor = nano
-[commit]
-	gpgsign = false
+# [commit]
+# 	gpgsign = false
 [url "git@github.com:"]
 	insteadOf = "https://github.com/"
 [push]
