@@ -180,7 +180,7 @@ delpod() {
 
 alias disk=sudo du -h --max-depth=6 / | sort -hr | head -n 10
 
-# set default for env variables
-if [[ -f "/workspaces/efds-fcpf-cost-model/.dev.env" ]]; then
-    source "/workspaces/efds-fcpf-cost-model/.dev.env"
-fi
+# # set default for env variables
+# if [[ -f "/workspaces/efds-fcpf-cost-model/.dev.env" ]]; then
+#     source "/workspaces/efds-fcpf-cost-model/.dev.env"
+# fi
