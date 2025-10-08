@@ -122,6 +122,9 @@ eval "$(starship init zsh)"
 alias va='source .venv/bin/activate'
 alias vd='deactivate'
 
+# logout from ghcr to solve auth issue
+docker logout ghcr.io
+
 export PATH=$PATH:$HOME/bin:$HOME/.local/bin
 
 alias cm=chezmoi
