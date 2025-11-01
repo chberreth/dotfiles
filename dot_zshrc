@@ -83,7 +83,8 @@ plugins=(
     you-should-use
 )
 
-source $ZSH/oh-my-zsh.sh
+[ -f $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
+
 
 # User configuration
 
@@ -190,4 +191,4 @@ alias disk=sudo du -h --max-depth=6 / | sort -hr | head -n 10
 
 
 # Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
