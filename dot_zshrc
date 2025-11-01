@@ -187,3 +187,7 @@ alias disk=sudo du -h --max-depth=6 / | sort -hr | head -n 10
 # if [[ -f "/workspaces/efds-fcpf-cost-model/.dev.env" ]]; then
 #     source "/workspaces/efds-fcpf-cost-model/.dev.env"
 # fi
+
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
