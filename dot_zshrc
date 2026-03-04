@@ -189,6 +189,26 @@ alias disk=sudo du -h --max-depth=6 / | sort -hr | head -n 10
 #     source "/workspaces/efds-fcpf-cost-model/.dev.env"
 # fi
 
+# Auto-load .env from current/parent directories (zsh only)
+# `set -a`expoirts vars so child processes like `databricks` can see them.
+load_dotenv_upwards() {
+  local dir="$PWD"
+  while [[ "$dir" != "/" ]]; do
+    if [[ -f "$dir/.env" ]]; then
+      set -a
+      source "$dir/.env"
+      set +a
+      break
+    fi
+    dir="$(dirname "$dir")"
+  done
+}
+
+autoload -U add-zsh-hook
+add-zsh-hook chpwd load_dotenv_upwards
+load_dotenv_upwards
+
+
 # add pyenv to path
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
