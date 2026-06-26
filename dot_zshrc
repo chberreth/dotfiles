@@ -88,6 +88,26 @@ plugins=(
 
 # User configuration
 
+# ======================================
+# ZSH HISTORY CONFIGURATION
+# ======================================
+# Save a lot of history
+HISTSIZE=100000                # Number of commands in memory
+SAVEHIST=100000                # Number of commands saved to file
+HISTFILE=~/.zsh_history        # History file location
+
+# Share history across all sessions in real-time
+setopt SHARE_HISTORY           # Share history between all sessions
+setopt INC_APPEND_HISTORY      # Write to history file immediately, not when shell exits
+setopt APPEND_HISTORY          # Append to history file rather than replace
+
+# Better history management
+setopt HIST_IGNORE_ALL_DUPS    # Remove older duplicate entries from history
+setopt HIST_REDUCE_BLANKS      # Remove superfluous blanks from history items
+setopt HIST_IGNORE_SPACE       # Don't save commands that start with space
+setopt HIST_VERIFY             # Show command with history expansion before running it
+setopt EXTENDED_HISTORY        # Save timestamp and duration
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
