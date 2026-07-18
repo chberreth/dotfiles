@@ -33,7 +33,5 @@
 	editor = nano
 [url "git@github.com:"]
 	insteadOf = "https://github.com/"
-[url "git@github.com-bayer:bayer-int"]
- insteadOf = git@github.com:bayer-int # set custom domain
 [push]
 	autoSetupRemote = true
