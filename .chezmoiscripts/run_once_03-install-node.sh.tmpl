@@ -1,5 +1,8 @@
 #!/bin/sh
 {{- if eq .profile "private" }}
+# Scripts run as a fresh sh process and don't source .zshrc, so brew's
+# PATH entries have to be set up explicitly here, not assumed.
+[ -x /home/linuxbrew/.linuxbrew/bin/brew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 if command -v node >/dev/null 2>&1; then
     echo "node already installed"
 else

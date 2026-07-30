@@ -1,6 +1,7 @@
 #!/bin/sh
 {{- if eq .profile "private" }}
 # Java runtime required by Maestro CLI (mobile E2E testing).
+[ -x /home/linuxbrew/.linuxbrew/bin/brew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 if command -v java >/dev/null 2>&1; then
     echo "java already installed"
 else

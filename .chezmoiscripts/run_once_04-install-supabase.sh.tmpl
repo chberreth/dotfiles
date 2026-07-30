@@ -1,5 +1,6 @@
 #!/bin/sh
 {{- if eq .profile "private" }}
+[ -x /home/linuxbrew/.linuxbrew/bin/brew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 if command -v supabase >/dev/null 2>&1; then
     echo "supabase already installed"
 else
