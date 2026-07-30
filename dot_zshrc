@@ -148,6 +148,19 @@ alias vd='deactivate'
 
 export PATH=$PATH:$HOME/bin:$HOME/.local/bin
 
+# Homebrew (installed by .chezmoiscripts/run_once_01-install-homebrew.sh)
+if [ -d /home/linuxbrew/.linuxbrew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+# openjdk is keg-only under Homebrew — not linked into PATH by default
+if command -v brew >/dev/null 2>&1; then
+  export PATH="$(brew --prefix openjdk 2>/dev/null)/bin:$PATH"
+fi
+
+# Maestro CLI (mobile E2E test runner)
+export PATH="$PATH:$HOME/.maestro/bin"
+
 alias cm=chezmoi
 
 alias costpods="KUBECONFIG=~/.kube/config_cost_dev kubectl --namespace=efds-fcpf-cost-forecasting get pod | grep Running"

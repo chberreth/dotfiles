@@ -1,0 +1,7 @@
+#!/bin/sh
+# adb, needed by Maestro to talk to a connected Android device/emulator.
+if command -v adb >/dev/null 2>&1; then
+    echo "adb already installed"
+else
+    brew install android-platform-tools
+fi
