@@ -3,6 +3,9 @@
 if command -v brew >/dev/null 2>&1; then
     echo "brew already installed"
 else
-    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # Interactive on purpose: first install needs sudo to create/chown
+    # /home/linuxbrew/.linuxbrew, and chezmoi apply runs at a real
+    # terminal where the user can answer that prompt.
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 {{- end }}
