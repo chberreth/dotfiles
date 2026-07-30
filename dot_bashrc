@@ -125,3 +125,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# Maestro CLI (mobile E2E test runner)
+export PATH=$PATH:$HOME/.maestro/bin

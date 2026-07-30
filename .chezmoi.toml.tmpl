@@ -19,6 +19,20 @@
 {{-   $email = promptString "email" $email -}}
 {{- end -}}
 
+{{- /* Selects which scripts run on this machine: "private" (personal
+     machines) vs "work" (professional context, e.g.
+     GitHub Codespaces or a work WSL install). Non-interactive runs (like
+     Codespaces' unattended install.sh) can't be prompted, so they default
+     straight to "work" with no human present. */ -}}
+{{- $profile := "" -}}
+{{- if hasKey . "profile" -}}
+{{-   $profile = .profile -}}
+{{- else if $interactive -}}
+{{-   $profile = promptString "profile (private/work)" "private" -}}
+{{- else -}}
+{{-   $profile = "work" -}}
+{{- end -}}
+
 {{- if $interactive -}}
 {{-   writeToStdout "💡 Tip: you can re-enter your name and email with `chezmoi init --data=false`.\n" -}}
 {{- end -}}
@@ -28,6 +42,7 @@ sourceDir = {{ .chezmoi.sourceDir | quote }}
 [data]
     name = {{ $name | quote }}
     email = {{ $email | quote }}
+    profile = {{ $profile | quote }}
 
 [git]
     autoCommit = true

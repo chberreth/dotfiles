@@ -1,6 +1,8 @@
 #!/bin/sh
+{{- if eq .profile "private" }}
 if command -v supabase >/dev/null 2>&1; then
     echo "supabase already installed"
 else
     brew install supabase/tap/supabase
 fi
+{{- end }}
