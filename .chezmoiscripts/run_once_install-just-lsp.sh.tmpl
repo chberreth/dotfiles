@@ -21,7 +21,13 @@ else
             exit 0
             ;;
     esac
-    version="$(curl -fsSL https://api.github.com/repos/terror/just-lsp/releases/latest | grep -m1 '"tag_name"' | cut -d '"' -f4)"
+    # Buffer the API response fully before grepping it (rather than piping
+    # curl straight into `grep -m1`) - grep -m1 exits the instant it finds
+    # a match, closing the pipe while curl is still writing the rest of the
+    # response, which makes curl report a spurious "Failure writing output
+    # to destination" even though the data it needed was already captured.
+    release_json="$(curl -fsSL https://api.github.com/repos/terror/just-lsp/releases/latest)"
+    version="$(printf '%s' "$release_json" | grep -m1 '"tag_name"' | cut -d '"' -f4)"
     mkdir -p "$HOME/.local/bin"
     curl -fsSL "https://github.com/terror/just-lsp/releases/download/${version}/just-lsp-${version}-${target}.tar.gz" \
         | tar -xz -C "$HOME/.local/bin" ./just-lsp
