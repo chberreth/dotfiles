@@ -3,6 +3,9 @@
 if  command -v just >/dev/null 2>&1; then
     echo "just already installed"
 else
-    pipx install rust-just
+    if ! command -v pipx >/dev/null 2>&1 && ! python3 -m pipx --version >/dev/null 2>&1; then
+        python3 -m pip install --user pipx
+    fi
+    python3 -m pipx install rust-just
 fi
 {{- end }}
