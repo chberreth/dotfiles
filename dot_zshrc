@@ -257,3 +257,37 @@ fi
 
 # Set up fzf key bindings and fuzzy completion
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Databricks PAT profiles (GitHub Codespaces)
+# Adds [User-PAT-PRD] / [User-PAT-QAS] to $DATABRICKS_CONFIG_FILE from the
+# codespace secrets DATABRICKS_HOST_<ENV> / DATABRICKS_USER_PAT_<ENV> if they
+# are missing. Over SSH the secrets are only exported in login shells, so fall
+# back to the Codespaces secrets file (values are base64-encoded).
+_dbx_secret() {
+  local name=$1 line
+  local f=${CODESPACES_SECRETS_FILE:-/workspaces/.codespaces/shared/.env-secrets}
+  if [[ -n ${(P)name} ]]; then
+    print -r -- "${(P)name}"
+  elif [[ -r $f ]] && line=$(grep -m1 "^${name}=" "$f"); then
+    print -r -- "${line#*=}" | base64 -d 2>/dev/null
+  fi
+}
+
+ensure_databricks_pat_profiles() {
+  local cfg=${DATABRICKS_CONFIG_FILE:-$HOME/.databrickscfg} env host token
+  for env in PRD QAS; do
+    grep -q "^\[User-PAT-${env}\]" "$cfg" 2>/dev/null && continue
+    host=$(_dbx_secret DATABRICKS_HOST_${env})
+    token=$(_dbx_secret DATABRICKS_USER_PAT_${env})
+    if [[ -z $host || -z $token ]]; then
+      print -u2 "databricks: no secrets for ${env}, skipping User-PAT-${env}"
+      continue
+    fi
+    ( umask 077; printf '\n[User-PAT-%s]\nhost  = %s\ntoken = %s\n' "$env" "$host" "$token" >> "$cfg" )
+    print "databricks: added profile User-PAT-${env} to ${cfg}"
+  done
+}
+
+if [[ $CODESPACES == true ]]; then
+  ensure_databricks_pat_profiles
+fi
