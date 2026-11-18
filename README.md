@@ -1,5 +1,17 @@
 # README
 
+## Quarto
+
+`chezmoi apply` installs Quarto 1.11.9 on Linux (x86_64 or ARM64) using
+`.chezmoiscripts/run_once_10-install-quarto.sh`. The script verifies the official
+release's SHA-256 checksum, installs under `~/.local/share/quarto/`, and links
+`quarto` into `~/.local/bin`, which is already on the managed Zsh PATH.
+Existing installations are left unchanged.
+
+Check the installation with `quarto --version` and `quarto check`.
+Commit and push the dotfiles changes so future machines and Codespaces receive
+the installer through the normal chezmoi setup.
+
 
 ## Initialize project
 
